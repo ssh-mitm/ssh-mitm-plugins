@@ -11,9 +11,9 @@ with open(path.join(this_directory, 'README.md'), encoding='utf-8') as f:
 
 
 def get_entry_points():
-    from ssh_proxy_server.__entrypoints__ import entry_points as ssh_entry_points
+    from plugins.__entrypoints__ import entry_points as plugins_entry_points
     return {
-        **ssh_entry_points
+        **plugins_entry_points
     }
 
 
@@ -22,14 +22,14 @@ setup(
     version='0.1',
     author='Simon Böhm',
     author_email='support@ssh-mitm.at',
-    description='plugins for ssh-mitm server',
+    description='plugins for ssh-mitm server, advanced features',
     long_description=long_description,
     long_description_content_type='text/markdown',
-    keywords="ssh proxy mitm network security audit plugins",
+    keywords="ssh proxy mitm network security audit plugins features advanced",
     packages=find_packages(),
-    url="https://ssh-mitm.at",
+    url="https://github.com/The5imon/ssh-mitm-plugins",
     project_urls={
-        'Documentation': 'https://docs.ssh-mitm.at',
+        'Documentation': 'https://ssh-mitm-plugins.readthedocs.io',
         'Source': 'https://github.com/The5imon/ssh-mitm-plugins',
         'Tracker': 'https://github.com/The5imon/ssh-mitm-plugins/issues',
     },
