@@ -1,6 +1,6 @@
 entry_points = {
     'SSHBaseForwarder': [
-        'scriptedshell = plugins.ssh:SSHScriptedForwarder',
+        'scriptedshell = plugins.ssh.scriptedshell:SSHScriptedForwarder',
     ],
     'SCPBaseForwarder': [
 
