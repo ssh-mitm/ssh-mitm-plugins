@@ -1,5 +1,6 @@
 import logging
 import os
+import enhancements.modules
 
 from ssh_proxy_server.forwarders.ssh import SSHForwarder
 
@@ -8,13 +9,13 @@ class SSHScriptedForwarder(SSHForwarder):
 
     @classmethod
     def parser_arguments(cls):
-        cls.PARSER.add_argument(
+        cls.parser().add_argument(
             '--ssh-script',
             dest='ssh_script',
             help='script to execute on ssh connection',
             required=True
         )
-        cls.PARSER.add_argument(
+        cls.parser().add_argument(
             '--ssh-out-dir',
             dest='ssh_out_dir',
             help='script output directory',
