@@ -30,8 +30,8 @@ setup(
     url="https://ssh-mitm.at",
     project_urls={
         'Documentation': 'https://docs.ssh-mitm.at',
-        'Source': 'https://github.com/ssh-mitm/ssh-mitm',
-        'Tracker': 'https://github.com/ssh-mitm/ssh-mitm/issues',
+        'Source': 'https://github.com/The5imon/ssh-mitm-plugins',
+        'Tracker': 'https://github.com/The5imon/ssh-mitm-plugins/issues',
     },
     python_requires='>= 3.6',
     classifiers=[
