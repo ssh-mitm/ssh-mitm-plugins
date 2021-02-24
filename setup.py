@@ -11,7 +11,7 @@ with open(path.join(this_directory, 'README.md'), encoding='utf-8') as f:
 
 
 def get_entry_points():
-    from plugins.__entrypoints__ import entry_points as plugins_entry_points
+    from ssh_mitm_plugins.__entrypoints__ import entry_points as plugins_entry_points
     return {
         **plugins_entry_points
     }

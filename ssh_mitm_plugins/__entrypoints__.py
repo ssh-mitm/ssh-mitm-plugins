@@ -1,6 +1,6 @@
 entry_points = {
     'SSHBaseForwarder': [
-        'scriptedshell = plugins.ssh.scriptedshell:SSHScriptedForwarder',
+        'scriptedshell = ssh_mitm_plugins.ssh.scriptedshell:SSHScriptedForwarder',
     ],
     'SCPBaseForwarder': [
 
@@ -9,15 +9,6 @@ entry_points = {
 
     ],
     'SFTPHandlerBasePlugin': [
-
-    ],
-    'BaseServerInterface': [
-
-    ],
-    'BaseSSHProxyManager': [
-
-    ],
-    'Authenticator': [
 
     ]
 }

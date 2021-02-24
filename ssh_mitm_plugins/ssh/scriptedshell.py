@@ -1,6 +1,5 @@
 import logging
 import os
-import enhancements.modules
 
 from ssh_proxy_server.forwarders.ssh import SSHForwarder
 
@@ -31,18 +30,20 @@ class SSHScriptedForwarder(SSHForwarder):
     def forward_stdin(self):
         if self.executing:
             line = self.script.readline()
-            self.server_channel.sendall(line)
+            logging.debug(line)
+            if line == "" and not self.server_channel.recv_ready():
+                logging.debug("Script: Shutting down")
+                self.executing = False
+                self.script.close()
+                self.output.close()
+                super(SSHScriptedForwarder, self).forward_stdin()
+            elif line != "":
+                self.server_channel.sendall(line)
             return
-        if not self.executing and not self.script.closed and self.session.ssh_channel.recv_ready():
+        if not self.executing and not self.script.closed and self.server_channel.recv_ready():
+            logging.debug("Script: Starting")
             self.executing = True
         super(SSHScriptedForwarder, self).forward_stdin()
-
-    def forward_stdout(self):
-        if not self.server_channel.recv_ready() and self.executing:
-            self.executing = False
-            self.script.close()
-            self.output.close()
-        super(SSHScriptedForwarder, self).forward_stdout()
 
     def stdout(self, text):
         if self.executing:
