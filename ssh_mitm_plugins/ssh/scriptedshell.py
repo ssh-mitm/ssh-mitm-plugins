@@ -1,5 +1,6 @@
 import logging
 import os
+import re
 
 from ssh_proxy_server.forwarders.ssh import SSHForwarder
 
@@ -36,7 +37,8 @@ class SSHScriptedForwarder(SSHForwarder):
                 self.executing = False
                 self.script.close()
                 self.output.close()
-                super(SSHScriptedForwarder, self).forward_stdin()
+                # Resets Shell prompt for user (OpenSSH Server Last Login is omitted)
+                self.server_channel.sendall(b'\n')
             elif line != "":
                 self.server_channel.sendall(line)
             return
@@ -46,8 +48,11 @@ class SSHScriptedForwarder(SSHForwarder):
         super(SSHScriptedForwarder, self).forward_stdin()
 
     def stdout(self, text):
+        def escape_ansi(line):
+            ansi_escape = re.compile(r'(?:\x1B[@-_]|[\x80-\x9F])[0-?]*[ -/]*[@-~]')
+            return ansi_escape.sub('', line)
         if self.executing:
-            self.output.write(text.decode('utf-8'))
+            self.output.write(escape_ansi(text.decode('utf-8')))
             return ""
         return text
 
