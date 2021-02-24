@@ -18,19 +18,19 @@ class SSHInjectableForwarder(SSHForwarder):
 
     @classmethod
     def parser_arguments(cls):
-        cls.PARSER.add_argument(
+        cls.parser().add_argument(
             '--ssh-injector-net',
             dest='ssh_injector_net',
             default='127.0.0.1',
             help='local address/interface where injector sessions are served'
         )
-        cls.PARSER.add_argument(
+        cls.parser().add_argument(
             '--ssh-injector-enable-mirror',
             dest='ssh_injector_enable_mirror',
             action="store_true",
             help='disables host session mirroring for the injector shell'
         )
-        cls.PARSER.add_argument(
+        cls.parser().add_argument(
             '--ssh-injectshell-key',
             dest='ssh_injectshell_key'
         )
@@ -126,9 +126,9 @@ class InjectorShell(threading.Thread):
     BUF_LEN = 1024
     STEALTH_WARNING = """
     [NOTE]\r\n
-    This is a hidden shell injected into the secure session the originally host created.\r\n
+    This is a hidden shell injected into the secure session the original host created.\r\n
     Any commands issued CAN affect the environment of the user BUT will not be displayed on their terminal!\r\n
-    Exit the hidden shell with CTRL+C
+    Exit the hidden shell with CTRL+C\r\n
     """
 
     def __init__(self, remote, client_channel, forwarder):

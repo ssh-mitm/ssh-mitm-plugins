@@ -22,7 +22,7 @@ setup(
     version='0.1',
     author='Simon Böhm',
     author_email='support@ssh-mitm.at',
-    description='plugins for ssh-mitm server, advanced features',
+    description='advanced features for ssh-mitm server',
     long_description=long_description,
     long_description_content_type='text/markdown',
     keywords="ssh proxy mitm network security audit plugins features advanced",
