@@ -28,11 +28,17 @@ class SSHInjectableForwarder(SSHForwarder):
             '--ssh-injector-enable-mirror',
             dest='ssh_injector_enable_mirror',
             action="store_true",
-            help='disables host session mirroring for the injector shell'
+            help='enables host session mirroring for the injector shell'
         )
         cls.parser().add_argument(
             '--ssh-injectshell-key',
             dest='ssh_injectshell_key'
+        )
+        cls.parser().add_argument(
+            '--ssh-injector-super-stealth',
+            dest='ssh_injector_super_stealth',
+            action='store_true',
+            help='enables stealth injector operation (best used with session mirror)'
         )
 
     def __init__(self, session):
@@ -125,11 +131,16 @@ class InjectorShell(threading.Thread):
 
     BUF_LEN = 1024
     STEALTH_WARNING = """
-    [NOTE]\r\n
-    This is a hidden shell injected into the secure session the original host created.\r\n
-    Any commands issued CAN affect the environment of the user BUT will not be displayed on their terminal!\r\n
-    Exit the hidden shell with CTRL+C\r\n
-    """
+[NOTE]\r\n
+This is a hidden shell injected into the secure session the original host created.\r\n
+Any commands issued CAN affect the environment of the user BUT will not be displayed on their terminal!\r\n
+Exit the hidden shell with CTRL+C\r\n
+"""
+    SUPER_STEALTH = """
+[SUPERSTEALTH]\r\n
+Commands from the injected shell will only be executed if they do not interfere with normal operation of the original host!
+\r\n
+"""
 
     def __init__(self, remote, client_channel, forwarder):
         super(InjectorShell, self).__init__()
@@ -139,7 +150,9 @@ class InjectorShell(threading.Thread):
         self.client_channel = client_channel
 
     def run(self) -> None:
-        self.client_channel.sendall(self.STEALTH_WARNING)
+        self.client_channel.sendall(
+            self.STEALTH_WARNING + self.SUPER_STEALTH if self.forwarder.args.ssh_injector_super_stealth else ""
+        )
         try:
             while not self.forwarder.session.ssh_channel.closed:
                 if self.client_channel.recv_ready():
