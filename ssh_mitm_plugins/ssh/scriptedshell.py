@@ -37,7 +37,7 @@ class SSHScriptedForwarder(SSHForwarder):
                 self.executing = False
                 self.script.close()
                 self.output.close()
-                # Resets Shell prompt for user (OpenSSH Server Last Login is omitted)
+                # Resets Shell prompt for user (OpenSSH server's "Last Login" message is omitted)
                 self.server_channel.sendall(b'\n')
             elif line != "":
                 self.server_channel.sendall(line)
@@ -48,6 +48,7 @@ class SSHScriptedForwarder(SSHForwarder):
         super(SSHScriptedForwarder, self).forward_stdin()
 
     def stdout(self, text):
+        # https://stackoverflow.com/a/38662876
         def escape_ansi(line):
             ansi_escape = re.compile(r'(?:\x1B[@-_]|[\x80-\x9F])[0-?]*[ -/]*[@-~]')
             return ansi_escape.sub('', line)
