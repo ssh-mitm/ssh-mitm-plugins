@@ -10,5 +10,7 @@
    :maxdepth: 2
    :caption: Contents:
 
+   start
    injectorshell
+   stealthshell
    scriptedshell
