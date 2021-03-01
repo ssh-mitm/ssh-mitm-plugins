@@ -11,7 +11,7 @@ with open(path.join(this_directory, 'README.md'), encoding='utf-8') as f:
 
 
 def get_entry_points():
-    from plugins.__entrypoints__ import entry_points as plugins_entry_points
+    from ssh_mitm_plugins.__entrypoints__ import entry_points as plugins_entry_points
     return {
         **plugins_entry_points
     }
@@ -22,7 +22,7 @@ setup(
     version='0.1',
     author='Simon Böhm',
     author_email='support@ssh-mitm.at',
-    description='plugins for ssh-mitm server, advanced features',
+    description='advanced features for ssh-mitm server',
     long_description=long_description,
     long_description_content_type='text/markdown',
     keywords="ssh proxy mitm network security audit plugins features advanced",
