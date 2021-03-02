@@ -2,7 +2,7 @@
 
 ![SSH-MITM example](https://ssh-mitm.at/img/mitm-example.png)
 
-With version 0.4.0 the [ssh-mitm](http://ssh-mitm.at/) projects locks the features
+With version 0.4.0 the [ssh-mitm projects](http://ssh-mitm.at/) locks the features
 shipping with the core functionality of the program. It is now preferred that any additions to the
 feature-set is made through the modular capabilities that the ssh-mitm project is built upon. Using
 entrypoints in combination with modules anyone can make their own ssh-mitm plugins.
