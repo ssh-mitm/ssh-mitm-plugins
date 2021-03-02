@@ -6,9 +6,12 @@
  SSH-MITM Plugins Documentation
 ============================================
 
+Home
+======
+
 .. toctree::
    :maxdepth: 2
-   :caption: Contents:
 
-   injectorshell
-   scriptedshell
+   start
+   ssh-interfaces
+
