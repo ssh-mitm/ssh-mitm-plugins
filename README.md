@@ -2,17 +2,13 @@
 
 ![SSH-MITM example](https://ssh-mitm.at/img/mitm-example.png)
 
+With version 0.4.0 the [ssh-mitm](http://ssh-mitm.at/) projects locks the features
+shipping with the core functionality of the program. It is now preferred that any additions to the
+feature-set is made through the modular capabilities that the ssh-mitm project is built upon. Using
+entrypoints in combination with modules anyone can make their own ssh-mitm plugins.
 
-
-After working on features and functionality of the
-[ssh-mitm](http://ssh-mitm.at/)
-project it was decided that the features of the ssh-mitm version 0.4.0
-should be locked and any further additions to its feature-set should be
-made externally.
-This was done to keep the ssh-mitm project to its core functionality.
-The ssh-mitm plugins are advanced features that should enhance the capabilities of the ssh-mitm server.
-Here you will find detailed feature-oriented documentation of the creators
-additions to the ssh-mitm project.
+This projects adds some advanced features to the ssh-mitm server that furthers its capabilities
+to realise security audits.
 
 ## Installation
 
