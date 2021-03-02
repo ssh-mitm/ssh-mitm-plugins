@@ -26,10 +26,13 @@ Following advanced features will be made available through the modular runtime c
 the ssh-mitm server.
 
 #### SSH 
-* stealthshell - improving on the injectorshell, this ssh interface will
+* stealthshell - improving on the *injectorshell*, this ssh interface will
 make hijacking of a ssh session undetectable
 * scriptedshell - perfect for security audits and information gathering, this ssh interface executes
 a script on the remote machine and stores the output on the ssh-mitm server
+
+For a more detailed look at the plugins usage and operation refer to the 
+[documentation](http://ssh-mitm-plugins.readthedocs.io).
 
 ## SSH-MITM
 
