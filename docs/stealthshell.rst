@@ -17,8 +17,8 @@ work correctly.
 .. note::
     Environment considerations of the :ref:`injectorshell` are still uphold by the stealthshell. Discrepancy problems
     described by the :ref:`injectorshell` are solved by this newer edition (client cannot be interrupted by injected keystrokes BUT
-    unfinished injected strokes will be seen by the server). Only with the ``--ssh-injector-super-stealth`` option the
-    discrepancy between the user and all injector shells will not occur. It is recommended that the ``--ssh-injector-super-stealth``
+    unfinished injected strokes will be seen by the server). Only with the ``--ssh-injector-super-stealth`` option will the
+    discrepancy between the user and all injector shells not occur. It is recommended that the ``--ssh-injector-super-stealth``
     option is used in combination with the ``--ssh-injector-enable-mirror`` option to see more clearly when commands
     can be executed.
 

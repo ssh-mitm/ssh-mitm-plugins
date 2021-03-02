@@ -11,7 +11,7 @@ mirrorshell there can be multiple injected shells per ssh session. All these she
 share their environment but are served answers individually.
 
 Using the ``--ssh-injector-enable-mirror`` option injected shells can print the input of the user to their screen.
-This differs from the mirrorshell which always displays every keystroke on both terminals. The injectorshell
+This differs from the mirrorshell which always displays output on the injected as well as the clients shell. The injectorshell
 tries its best to not leak any unwanted output to the users session so that they can operate normally.
 
 By default injector shell access is limited to the local maschine ``localhost`` but can be opened up to any
