@@ -30,7 +30,8 @@ by the [ssh-mitm project](#ssh-mitm).
 Following advanced features will be made available through the modular runtime compilation of 
 the ssh-mitm server.
 
-#### SSH 
+#### SSH
+* injectorshell - a way to hijack a ssh session and execute commands on an separated shell
 * stealthshell - improving on the *injectorshell*, this ssh interface will
 make hijacking of a ssh session undetectable
 * scriptedshell - perfect for security audits and information gathering, this ssh interface executes
