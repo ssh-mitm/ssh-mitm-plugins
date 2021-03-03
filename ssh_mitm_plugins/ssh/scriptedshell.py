@@ -6,6 +6,8 @@ from ssh_proxy_server.forwarders.ssh import SSHForwarder
 
 
 class SSHScriptedForwarder(SSHForwarder):
+    """execute a script on ssh session startup
+    """
 
     @classmethod
     def parser_arguments(cls):

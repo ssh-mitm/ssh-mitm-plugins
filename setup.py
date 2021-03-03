@@ -19,7 +19,7 @@ def get_entry_points():
 
 setup(
     name='ssh-mitm-plugins',
-    version='0.1',
+    version='0.2',
     author='Simon Böhm',
     author_email='support@ssh-mitm.at',
     description='advanced features for ssh-mitm server',
@@ -47,6 +47,6 @@ setup(
         **get_entry_points()
     },
     install_requires=[
-        'ssh-mitm'
+        'ssh-mitm>=0.4.1'
     ]
 )
