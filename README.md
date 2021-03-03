@@ -16,6 +16,11 @@ Installing the ssh-mitm server including these plugins is very simple:
 
     $ pip install ssh-mitm-plugins
     
+Alternatively, ssh-mitm-plugins is featured as an optional dependency in the ssh-mitm package.
+Installation can occur through:
+    
+    $ pip install ssh-mitm[plugins]
+    
 The current version of the ssh-mitm server will be installed and additional advanced features
 will be available through these plugins. The ssh-mitm server will operate normally as described
 by the [ssh-mitm project](#ssh-mitm).
