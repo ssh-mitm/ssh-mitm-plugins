@@ -93,7 +93,6 @@ class SSHInjectableForwarder(SSHForwarder):
             self.close_session(self.channel)
 
     def forward_stdin(self):
-        # MTODO: maybe add host priority (priority queue); silent mode with client blocking input from injectors
         if self.session.ssh_channel.recv_ready():
             buf = self.session.ssh_channel.recv(self.BUF_LEN)
             self.queue.put((buf, self.session.ssh_channel))
@@ -126,11 +125,11 @@ class InjectorShell(threading.Thread):
 
     BUF_LEN = 1024
     STEALTH_WARNING = """
-    [NOTE]\r\n
-    This is a hidden shell injected into the secure session the originally host created.\r\n
-    Any commands issued CAN affect the environment of the user BUT will not be displayed on their terminal!\r\n
-    Exit the hidden shell with CTRL+C
-    """
+[INFO]\r
+This is a hidden shell injected into the secure session the original host created.\r
+Any commands issued CAN affect the environment of the user BUT will not be displayed on their terminal!\r
+Exit the hidden shell with CTRL+C\r
+"""
 
     def __init__(self, remote, client_channel, forwarder):
         super(InjectorShell, self).__init__()

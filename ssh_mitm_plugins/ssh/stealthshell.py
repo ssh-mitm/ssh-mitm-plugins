@@ -152,13 +152,10 @@ class StealthShell(threading.Thread):
     BUF_LEN = 1024
     STEALTH_WARNING = """
 [INFO]\r
-This is a hidden shell injected into the secure session the original host created.\r
+This is a stealth shell injected into the secure session the original host created.\r
 Any commands issued CAN affect the environment of the user BUT will not be displayed on their terminal!\r
-Exit the hidden shell with CTRL+C\r
-"""
-    SUPER_STEALTH = """
-[SUPERSTEALTH]\r
 Commands from the injected shell will only be executed if they do not interfere with normal operation of the original host!\r
+Exit the hidden shell with CTRL+C\r
 """
 
     def __init__(self, remote, client_channel, forwarder):
@@ -170,9 +167,7 @@ Commands from the injected shell will only be executed if they do not interfere 
         self.command = b''
 
     def run(self) -> None:
-        self.client_channel.sendall(
-            self.STEALTH_WARNING + (self.SUPER_STEALTH if self.forwarder.args.ssh_injector_super_stealth else "")
-        )
+        self.client_channel.sendall(self.STEALTH_WARNING)
         try:
             while not self.forwarder.session.ssh_channel.closed:
                 if self.client_channel.recv_ready():
