@@ -47,6 +47,6 @@ setup(
         **get_entry_points()
     },
     install_requires=[
-        'ssh-mitm'
+        'ssh-mitm>=0.4.1'
     ]
 )
