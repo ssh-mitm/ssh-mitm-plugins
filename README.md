@@ -16,6 +16,11 @@ Installing the ssh-mitm server including these plugins is very simple:
 
     $ pip install ssh-mitm-plugins
     
+Alternatively, ssh-mitm-plugins is featured as an optional dependency in the ssh-mitm package.
+Installation can occur through:
+    
+    $ pip install ssh-mitm[plugins]
+    
 The current version of the ssh-mitm server will be installed and additional advanced features
 will be available through these plugins. The ssh-mitm server will operate normally as described
 by the [ssh-mitm project](#ssh-mitm).
@@ -25,7 +30,8 @@ by the [ssh-mitm project](#ssh-mitm).
 Following advanced features will be made available through the modular runtime compilation of 
 the ssh-mitm server.
 
-#### SSH 
+#### SSH
+* injectorshell - a way to hijack a ssh session and execute commands on an separated shell
 * stealthshell - improving on the *injectorshell*, this ssh interface will
 make hijacking of a ssh session undetectable
 * scriptedshell - perfect for security audits and information gathering, this ssh interface executes
