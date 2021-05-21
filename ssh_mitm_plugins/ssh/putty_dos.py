@@ -1,5 +1,3 @@
-import logging
-
 from ssh_proxy_server.forwarders.ssh import SSHForwarder
 
 
