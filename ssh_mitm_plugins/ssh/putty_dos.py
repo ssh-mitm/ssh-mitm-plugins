@@ -1,3 +1,5 @@
+import logging
+
 from ssh_proxy_server.forwarders.ssh import SSHForwarder
 
 
@@ -21,8 +23,7 @@ class SSHPuttyDoSForwarder(SSHForwarder):
         ]
         self.executed = False
 
-    def stdin(self, text):
+    def forward_extra(self):
         if not self.executed:
+            self.server_channel.sendall('\n'.join(self.exploit) + '\n')
             self.executed = True
-            return '\n'.join(self.exploit)
-        return text
