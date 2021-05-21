@@ -19,7 +19,7 @@ def get_entry_points():
 
 setup(
     name='ssh-mitm-plugins',
-    version='0.2',
+    version='0.3',
     author='Simon Böhm',
     author_email='support@ssh-mitm.at',
     description='advanced features for ssh-mitm server',
@@ -27,11 +27,11 @@ setup(
     long_description_content_type='text/markdown',
     keywords="ssh proxy mitm network security audit plugins features advanced",
     packages=find_packages(),
-    url="https://github.com/The5imon/ssh-mitm-plugins",
+    url="https://github.com/ssh-mitm/ssh-mitm-plugins",
     project_urls={
         'Documentation': 'https://ssh-mitm-plugins.readthedocs.io',
-        'Source': 'https://github.com/The5imon/ssh-mitm-plugins',
-        'Tracker': 'https://github.com/The5imon/ssh-mitm-plugins/issues',
+        'Source': 'https://github.com/ssh-mitm/ssh-mitm-plugins',
+        'Tracker': 'https://github.com/ssh-mitm/ssh-mitm-plugins/issues',
     },
     python_requires='>= 3.6',
     classifiers=[
