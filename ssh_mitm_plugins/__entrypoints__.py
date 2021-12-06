@@ -1,9 +1,9 @@
 entry_points = {
     'SSHBaseForwarder': [
-        'scriptedshell = ssh_mitm_plugins.ssh.scriptedshell:SSHScriptedForwarder',
-        'stealthshell = ssh_mitm_plugins.ssh.stealthshell:SSHStealthForwarder',
-        'injectorshell = ssh_mitm_plugins.ssh.injectorshell:SSHInjectableForwarder',
-        'puttydos = ssh_mitm_plugins.ssh.putty_dos:SSHPuttyDoSForwarder'
+        'plugin-scriptedshell = ssh_mitm_plugins.ssh.scriptedshell:SSHScriptedForwarder',
+        'plugin-stealthshell = ssh_mitm_plugins.ssh.stealthshell:SSHStealthForwarder',
+        'plugin-injectorshell = ssh_mitm_plugins.ssh.injectorshell:SSHInjectableForwarder',
+        'plugin-puttydos = ssh_mitm_plugins.ssh.putty_dos:SSHPuttyDoSForwarder'
     ],
     'SCPBaseForwarder': [
 
