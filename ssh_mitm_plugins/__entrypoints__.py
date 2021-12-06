@@ -6,7 +6,6 @@ entry_points = {
         'plugin-puttydos = ssh_mitm_plugins.ssh.putty_dos:SSHPuttyDoSForwarder'
     ],
     'LocalPortForwardingBaseForwarder': [
-        'plugin-inject = ssh_mitm_plugins.tunnel.injectclienttunnel:InjectableClientTunnelForwarder',
-        'plugin-socks5 = ssh_mitm_plugins.tunnel.socks5:SOCKS5TunnelForwarder'
+        'plugin-inject = ssh_mitm_plugins.tunnel.injectclienttunnel:InjectableClientTunnelForwarder'
     ],
 }
