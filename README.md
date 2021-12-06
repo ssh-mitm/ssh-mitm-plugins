@@ -15,19 +15,15 @@ to realise security audits.
 Installing the ssh-mitm server including these plugins is very simple:
 
     $ pip install ssh-mitm-plugins
-    
-Alternatively, ssh-mitm-plugins is featured as an optional dependency in the ssh-mitm package.
-Installation can occur through:
-    
-    $ pip install ssh-mitm[plugins]
-    
+
+
 The current version of the ssh-mitm server will be installed and additional advanced features
 will be available through these plugins. The ssh-mitm server will operate normally as described
 by the [ssh-mitm project](#ssh-mitm).
 
 ## Plugins
 
-Following advanced features will be made available through the modular runtime compilation of 
+Following advanced features will be made available through the modular runtime compilation of
 the ssh-mitm server.
 
 #### SSH
@@ -37,7 +33,7 @@ make hijacking of a ssh session undetectable
 * scriptedshell - perfect for security audits and information gathering, this ssh interface executes
 a script on the remote machine and stores the output on the ssh-mitm server
 
-For a more detailed look at the plugins usage and operation refer to the 
+For a more detailed look at the plugins usage and operation refer to the
 [documentation](http://ssh-mitm-plugins.readthedocs.io).
 
 ## SSH-MITM
