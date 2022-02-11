@@ -1,5 +1,7 @@
 # SSH-MITM Plugins
 
+## The plugins are not maintained and only compatible with SSH-MITM 0.6.3!
+
 SSH-MITM plugins are extensions for SSH-MITM 0.6.3.
 
 **Note:** This plugins are not compatible with SSH-MITM >= 1.0.0!
