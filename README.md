@@ -1,6 +1,8 @@
 # SSH-MITM Plugins
 
-![SSH-MITM example](https://ssh-mitm.at/img/mitm-example.png)
+SSH-MITM plugins are extensions for SSH-MITM 0.6.3.
+
+**Note:** This plugins are not compatible with SSH-MITM >= 1.0.0!
 
 With version 0.4.0 the [ssh-mitm projects](http://ssh-mitm.at/) locks the features
 shipping with the core functionality of the program. It is now preferred that any additions to the
@@ -16,8 +18,7 @@ Installing the ssh-mitm server including these plugins is very simple:
 
     $ pip install ssh-mitm-plugins
 
-
-The current version of the ssh-mitm server will be installed and additional advanced features
+The ssh-mitm 0.6.3 will be installed and additional advanced features
 will be available through these plugins. The ssh-mitm server will operate normally as described
 by the [ssh-mitm project](#ssh-mitm).
 
@@ -41,5 +42,5 @@ For a more detailed look at the plugins usage and operation refer to the
 **For more information about the core functionality of the ssh-mitm server visit:**
 
 * Github        - https://github.com/ssh-mitm/ssh-mitm
-* Website       - http://ssh-mitm.at
+* Website       - http://www.ssh-mitm.at
 * Documentation - http://docs.ssh-mitm.at
