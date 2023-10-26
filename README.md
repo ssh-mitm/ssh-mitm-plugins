@@ -24,5 +24,4 @@ The project on [PyPI.org](https://pypi.org/project/ssh-mitm-plugins/) is current
 **For more information about the core functionality of the ssh-mitm server visit:**
 
 * Github        - https://github.com/ssh-mitm/ssh-mitm
-* Website       - http://www.ssh-mitm.at
 * Documentation - http://docs.ssh-mitm.at
