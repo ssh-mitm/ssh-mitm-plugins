@@ -1,43 +1,23 @@
 # SSH-MITM Plugins
 
-## The plugins are not maintained and only compatible with SSH-MITM 0.6.3!
+## The code in this repository is currently undergoing restructuring!
 
-SSH-MITM plugins are extensions for SSH-MITM 0.6.3.
 
-**Note:** This plugins are not compatible with SSH-MITM >= 1.0.0!
+Welcome to the SSH-MITM Plugin Repository! This repository serves as a comprehensive resource for showcasing the development of various plugins for the [SSH-MITM](https://github.com/ssh-mitm/ssh-mitm).
 
-With version 0.4.0 the [ssh-mitm projects](http://ssh-mitm.at/) locks the features
-shipping with the core functionality of the program. It is now preferred that any additions to the
-feature-set is made through the modular capabilities that the ssh-mitm project is built upon. Using
-entrypoints in combination with modules anyone can make their own ssh-mitm plugins.
+SSH-MITM is a powerful tool used for intercepting and modifying SSH connections for various purposes, including security testing, network analysis, and more. Plugins extend the functionality of SSH-MITM, allowing you to tailor its capabilities to suit your specific needs.
 
-This projects adds some advanced features to the ssh-mitm server that furthers its capabilities
-to realise security audits.
+In this repository, you'll find a collection of well-documented example plugins, each highlighting different aspects of plugin development. These examples cover a wide range of use cases, from custom authentication methods and logging to advanced manipulation of SSH traffic.
 
 ## Installation
 
 Installing the ssh-mitm server including these plugins is very simple:
 
-    $ pip install ssh-mitm-plugins
+    $ pip install pip install git+https://github.com/ssh-mitm/ssh-mitm-plugins.git
 
-The ssh-mitm 0.6.3 will be installed and additional advanced features
-will be available through these plugins. The ssh-mitm server will operate normally as described
-by the [ssh-mitm project](#ssh-mitm).
+**Note:**
 
-## Plugins
-
-Following advanced features will be made available through the modular runtime compilation of
-the ssh-mitm server.
-
-#### SSH
-* injectorshell - a way to hijack a ssh session and execute commands on an separated shell
-* stealthshell - improving on the *injectorshell*, this ssh interface will
-make hijacking of a ssh session undetectable
-* scriptedshell - perfect for security audits and information gathering, this ssh interface executes
-a script on the remote machine and stores the output on the ssh-mitm server
-
-For a more detailed look at the plugins usage and operation refer to the
-[documentation](http://ssh-mitm-plugins.readthedocs.io).
+The project on PyPI.org is currently not maintained and is only compatible with older versions of SSH-MITM due to the unavailability of repository access. Support has already been contacted, as indicated in this issue: https://github.com/pypi/support/issues/3301.
 
 ## SSH-MITM
 

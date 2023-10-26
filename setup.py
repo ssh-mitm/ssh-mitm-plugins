@@ -20,9 +20,9 @@ def get_entry_points():
 setup(
     name='ssh-mitm-plugins',
     version='0.6.1',
-    author='Simon Böhm',
+    author='SSH-MITM Dev-Team',
     author_email='support@ssh-mitm.at',
-    description='advanced features for ssh-mitm server',
+    description='example plugins for SSH-MITM',
     long_description=long_description,
     long_description_content_type='text/markdown',
     keywords="ssh proxy mitm network security audit plugins features advanced",
