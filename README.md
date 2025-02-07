@@ -15,10 +15,6 @@ Installing the ssh-mitm server including these plugins is very simple:
 
     $ pip install pip install git+https://github.com/ssh-mitm/ssh-mitm-plugins.git
 
-### ❗ Note for Pypi.org:
-
-The project on [PyPI.org](https://pypi.org/project/ssh-mitm-plugins/) is currently not maintained and is only compatible with older versions of SSH-MITM due to the unavailability of repository access. PyPi Support has already been contacted, as indicated in this issue: https://github.com/pypi/support/issues/3301.
-
 ## SSH-MITM
 
 **For more information about the core functionality of the ssh-mitm server visit:**
